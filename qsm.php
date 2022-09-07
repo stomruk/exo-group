@@ -6,6 +6,7 @@ class Qcm
 {
     public $form;
     public $note;
+    public $maxNote = 40;
 
     public function __construct()
     {
@@ -28,19 +29,19 @@ class Qcm
 
     public function setAppreciation(array $array){
         if($this->note== 0){
-            $this->form .= "<p>Note : ".$this->note/40*20 ."/20 " . $array[0] ."</p>";
+            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[0] ."</p>";
         }
         if($this->note == 10){
-            $this->form .= "<p>Note : ".$this->note/40*20 ."/20 " . $array[5] ."</p>";
+            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[5] ."</p>";
         }
         if($this->note == 20){
-            $this->form .= "<p>Note : ".$this->note/40*20 ."/20 " . $array[10] ."</p>";
+            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[10] ."</p>";
         }
         if($this->note == 30){
-            $this->form .= "<p>Note : ".$this->note/40*20 ."/20 " . $array[15] ."</p>";
+            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[15] ."</p>";
         }
         if($this->note == 40){
-            $this->form .= "<p>Note : ".$this->note/40*20 ."/20 " . $array[20] ."</p>";
+            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[20] ."</p>";
         }
     }
 
@@ -87,8 +88,6 @@ class Reponse
 }
 
 
-
-
 $notes = array(
     0 => 'NUL !',
     5 => 'pas bon',
@@ -96,7 +95,6 @@ $notes = array(
     15 => 'bon',
     20 => 'GODLIKE !',
 );
-
 
 
 $qcm = new Qcm();
@@ -120,7 +118,6 @@ $qcm->ajouterQuestion($question1);
 $qcm->ajouterQuestion($question2);
 $qcm->ajouterQuestion($question3);
 $qcm->ajouterQuestion($question4);
-//$qcm->setSubmit();
 
 
 if(isset($_POST) && !empty($_POST)){
