@@ -4,9 +4,11 @@
 
 class Qcm
 {
-    public $form;
-    public $note;
+    public $totalQuestions = 1;
+    public $note = 0;
+    public $noteSur20 = 0;
     public $maxNote = 40;
+    public $form;
 
     public function __construct()
     {
@@ -15,11 +17,13 @@ class Qcm
 
     public function ajouterQuestion(Question $question)
     {
+        $this->form .= "<h3 style='color:red'>" . "Question " . $this->totalQuestions . "</h3>";
         $this->form .= "<p>" . $question->question . "</p>";
         foreach ($question->reponses as $reponse) {
             $this->form .= "<label name='reponse'>$reponse->reponse</label>";
-            $this->form .= "<input type='radio' name=$question->question value='$reponse->reponse'.'>";
+            $this->form .= "<input type='radio' name=$question->question value='$reponse->reponse'.' required>";
         }
+        $this->totalQuestions++;
     }
 
     public function generer()
@@ -28,26 +32,26 @@ class Qcm
     }
 
     public function setAppreciation(array $array){
-        if($this->note== 0){
-            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[0] ."</p>";
+        if($this->noteSur20== 0){
+            $this->form .= "<p>Note : ".$this->noteSur20 ."/20 " . $array[0] ."</p>";
         }
-        if($this->note == 10){
-            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[5] ."</p>";
+        if($this->noteSur20 == 5){
+            $this->form .= "<p>Note : ".$this->noteSur20 ."/20 " . $array[5] ."</p>";
         }
-        if($this->note == 20){
-            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[10] ."</p>";
+        if($this->noteSur20 == 10){
+            $this->form .= "<p>Note : ".$this->noteSur20 ."/20 " . $array[10] ."</p>";
         }
-        if($this->note == 30){
-            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[15] ."</p>";
+        if($this->noteSur20 == 15){
+            $this->form .= "<p>Note : ".$this->noteSur20 ."/20 " . $array[15] ."</p>";
         }
-        if($this->note == 40){
-            $this->form .= "<p>Note : ".$this->note/$this->maxNote*20 ."/20 " . $array[20] ."</p>";
+        if($this->noteSur20 == 20){
+            $this->form .= "<p>Note : ".$this->noteSur20 ."/20 " . $array[20] ."</p>";
         }
     }
 
     public function ajouterpoint(){
         $this->note += 10;
-        return $this->note;
+        return $this->noteSur20 = $this->note/$this->maxNote*20;
     }
 
 
@@ -135,6 +139,7 @@ if(isset($_POST) && !empty($_POST)){
     }
     $qcm->setAppreciation($notes);
 }
+
 
 
 echo $qcm->generer();
