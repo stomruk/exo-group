@@ -104,7 +104,6 @@ $question1 = new Question('2+2');
 $question1->ajouterReponse(new Reponse('3'));
 $question1->ajouterReponse(new Reponse('4', Reponse::BONNE_REPONSE));
 $question1->ajouterReponse(new Reponse('5'));
-$question1->
 $question2 = new Question('5+2');
 $question2->ajouterReponse(new Reponse('4'));
 $question2->ajouterReponse(new Reponse('7', Reponse::BONNE_REPONSE));
@@ -138,6 +137,7 @@ if(isset($_POST) && !empty($_POST)){
     }
     $qcm->setAppreciation($notes);
 };
+
 
 
 echo $qcm->generer();
